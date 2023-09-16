@@ -3,6 +3,9 @@ import "./Home.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import { BiPlay } from "react-icons/bi";
+import { AiOutlinePlus } from "react-icons/ai";
+
 const apikey = "ce1c89f292349a348ae55dea8b0f3482";
 const url = "https://api.themoviedb.org/3";
 const imgUrl = "https://image.tmdb.org/t/p/original";
@@ -33,7 +36,12 @@ const Home = () => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
-  const [genre,setGenre] = useState([])
+  const [genre, setGenre] = useState([]);
+
+   
+
+  let i = Math.floor(Math.random() * 20);
+
   useEffect(() => {
     const fetchUpcoming = async () => {
       const {
@@ -70,9 +78,8 @@ const Home = () => {
       const {
         data: { genres },
       } = await axios.get(`${url}/genre/movie/list?api_key=${apikey}`);
-      console.log(genres);
+
       setGenre(genres);
-      console.log(genre);
     };
 
     getAllGenre();
@@ -80,12 +87,31 @@ const Home = () => {
     fetchNowPlaying();
     fetchPopular();
     fetchTopRated();
-    
   }, []);
 
   return (
     <section className="home">
-      <div className="banner"></div>
+      <div
+        className="banner"
+        style={{
+          backgroundImage: popularMovies[i]
+            ? `url(${`${imgUrl}/${popularMovies[i].poster_path}`})`
+            : "rgb(16,16,16)",
+        }}
+      >
+        {popularMovies[i] && <h1>{popularMovies[i]?.original_title}</h1>}
+
+        {popularMovies[i] && <p>{popularMovies[i]?.overview}</p>}
+
+        <div>
+          <button>
+            <BiPlay /> Play{" "}
+          </button>
+          <button>
+            My List <AiOutlinePlus />
+          </button>
+        </div>
+      </div>
 
       <Row title={"Upcoming Movies"} arr={upcomingMovies} />
       <Row title={"Now Playing"} arr={nowPlayingMovies} />
@@ -93,11 +119,11 @@ const Home = () => {
       <Row title={"Top Rated"} arr={topRatedMovies} />
 
       <div className="genreBox">
-        {genre?.map((item, index) => {
-          <Link key={index} to={`/genre/${item.id}`}>
+        {genre.map((item) => (
+          <Link key={item.id} to={`/genre/${item.id}`}>
             {item.name}
-          </Link>;
-        })}
+          </Link>
+        ))}
       </div>
     </section>
   );

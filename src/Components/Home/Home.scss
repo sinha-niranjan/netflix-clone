@@ -1,17 +1,89 @@
 $bg: rgba(16, 16, 16);
 .banner {
-  height: 400px;
+  height: 500px;
   background-color: $bg;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 3rem;
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: $bg;
+    opacity: 0.4;
+    top: 0%;
+    left: 0%;
+  }
+
+  h1,
+  p {
+    color: white;
+    font-size: 4rem;
+    width: 40%;
+    z-index: 10;
+  }
+
+  p {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    font-weight: 100;
+  }
+
+  > div {
+    display: flex;
+
+    button {
+      cursor: pointer;
+      padding: 1rem;
+      width: 150px;
+      outline: none;
+      border: none;
+      background-color: white;
+      z-index: 10;
+      border-radius: 5px;
+      margin: 1rem;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s;
+      &:hover{
+        opacity: 0.6;
+      }
+
+      &:nth-child(odd) {
+        background-color: white;
+        color: black;
+      }
+
+      &:nth-child(even) {
+        background-color: rgb(76, 76, 76);
+        color: white;
+      }
+
+      svg {
+        font-size: 1.7rem;
+        margin: 0 10px;
+      }
+    }
+  }
 }
 
-.row{
+.row {
   background-color: $bg;
   padding: 1rem;
-  >h2{
+  > h2 {
     margin: 0.3rem;
     font-weight: 400;
   }
-  >div{
+  > div {
     display: flex;
     justify-content: space-evenly;
     overflow-x: auto;
@@ -19,23 +91,33 @@ $bg: rgba(16, 16, 16);
   }
 }
 
-
-.card{
+.card {
   width: 200px;
   margin: 0.3rem;
   cursor: pointer;
   transition: transform 0.5s;
-  &:hover{
+  &:hover {
     transform: translateY(-10px) scale(1.05);
   }
 }
 
-.genreBox{
+.genreBox {
   overflow-x: auto;
-  > a{
-    color:black;
+  display: flex;
+  height: 100px;
+  background-color: $bg;
+
+  > a {
+    text-align: center;
+    color: black;
     background-color: white;
-    padding: 1rem;
+    padding: 1rem 0;
     margin: 1rem;
+    border-radius: 5px;
+    min-width: 10rem;
+
+    &:hover {
+      background-color: rgb(236, 236, 236);
+    }
   }
 }

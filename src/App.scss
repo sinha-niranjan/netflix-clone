@@ -4,6 +4,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
 }
 
 a,
